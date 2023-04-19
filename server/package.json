@@ -1,0 +1,28 @@
+{
+  "name": "sunday_league_server",
+  "version": "0.0.1",
+  "description": "Backend for Sunday League, the football manager experience",
+  "main": "app.js",
+  "scripts": {
+    "dev": "ts-node-dev src/app.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ingo Siemens <siemens.ingo@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@types/morgan": "^1.9.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongodb": "^5.3.0",
+    "morgan": "^1.10.0"
+  }
+}
