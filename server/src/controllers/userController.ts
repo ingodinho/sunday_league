@@ -1,11 +1,17 @@
 import {Request, Response} from "express";
-import {findAll} from "../data/userDAO";
+import {addUser} from "../services/user/addUser";
+import {UserRegisterDTO} from "../models/user/userDTO";
 
-const getOneUser = async (req : Request, res : Response) => {
-    const user = await findAll();
-    res.json(user);
+const registerUser = async (req : Request, res : Response) => {
+    try {
+        const newUser = await addUser(req.body as UserRegisterDTO);
+        res.status(200).json(newUser);
+    } catch (error) {
+        console.log(error);
+        res.status(400).end();
+    }
 }
 
 export default {
-    getOneUser
+    registerUser
 }
