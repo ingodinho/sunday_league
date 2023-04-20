@@ -1,19 +1,13 @@
 import {UserModel} from "../../models/mongoose/userModel";
-import {UserRegisterDTO} from "../../models/user/userDTO";
-import {createHash, createRandomHash} from "../../utils/encryption/createHash";
+import {User} from "../../models/user/user";
 
-export const addUser = async (user : UserRegisterDTO) => {
+export const add = async (user: User) => {
 
-    const passwordSalt = createRandomHash();
-    const passwordHash = createHash(user.password + passwordSalt);
+    const foundUser = await UserModel.findOne({email: user.email});
+    if (foundUser) {
+        throw new Error("add User: E-Mail already taken");
+    }
 
-    const userInstance = new UserModel({
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        passwordHash: passwordHash,
-        passwordSalt: passwordSalt
-    });
-
-     return await userInstance.save();
+    const userInstance = new UserModel(user);
+    return await userInstance.save();
 }
