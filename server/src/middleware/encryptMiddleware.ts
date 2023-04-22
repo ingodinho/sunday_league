@@ -6,6 +6,7 @@ export const encryptPassword = (req: Request, res: Response, next: NextFunction)
 
     req.body.passwordHash = createHash(req.body.password + passwordSalt);
     req.body.passwordSalt = passwordSalt;
+    req.body.password = "";
 
     next();
 }

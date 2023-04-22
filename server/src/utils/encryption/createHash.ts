@@ -12,9 +12,5 @@ export const createHash = (input : string) : string => {
 }
 
 export const createRandomHash = () => {
-    if(!SECRET) {
-        throw new Error("Environment Variable HASH_SECRET not initialized");
-    }
-
     return createHash(Math.random().toString())
 }
