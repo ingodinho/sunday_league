@@ -11,3 +11,4 @@ userRouter.get("/protected", protectedAccess, userController.protectedRoute);
 userRouter.post("/register", encryptPassword, userController.register);
 userRouter.post("/login", userController.login);
 userRouter.post("/refresh", protectedRefresh, userController.refreshAccessToken);
+userRouter.post("/logout", protectedAccess, userController.logout);

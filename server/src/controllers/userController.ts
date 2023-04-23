@@ -45,9 +45,20 @@ const refreshAccessToken = async (req: Request, res: Response) => {
     }
 }
 
+const logout = async (req: Request, res: Response) => {
+    try {
+        res.clearCookie("r3fr3sh");
+        res.status(200).end();
+    } catch (error) {
+        console.log("C: logout: ", error);
+        res.status(400).end();
+    }
+}
+
 export default {
     register,
     login,
     protectedRoute,
-    refreshAccessToken
+    refreshAccessToken,
+    logout
 }

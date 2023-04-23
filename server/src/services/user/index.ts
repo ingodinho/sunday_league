@@ -5,5 +5,5 @@ import {refreshAccessToken} from "./refreshAccessToken";
 export default {
     add,
     login,
-    refreshAccessToken
+    refreshAccessToken,
 }
