@@ -15,7 +15,7 @@ export const createToken = (user : User, tokenType = "access") => {
             : durationRefreshToken);
 
     const tokenPayload = {
-        sub: user.id,
+        sub: user._id,
         exp: expiresAt,
         iat: initiatedAt,
         tokenType

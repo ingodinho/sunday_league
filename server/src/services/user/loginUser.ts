@@ -1,11 +1,11 @@
 import {UserLoginDTO} from "../../models/user/userDTO";
-import {UserModel} from "../../models/mongoose/userModel";
+import {MUserModel} from "../../models/mongoose/userModel";
 import {createHash} from "../../utils/encryption/createHash";
 import {createToken} from "../../utils/token/createToken";
 import {User} from "../../models/user/user";
 
 export const login = async (loginCredentials : UserLoginDTO) => {
-    const foundUser= await UserModel.findOne({email: loginCredentials.email});
+    const foundUser = await MUserModel.findOne({email: loginCredentials.email}) as User;
     if(!foundUser) {
         throw new Error("login: no user found");
     }
@@ -17,8 +17,8 @@ export const login = async (loginCredentials : UserLoginDTO) => {
         throw new Error("login: password is not correct");
     }
 
-    const accessToken = createToken(foundUser as User);
-    const refreshToken = createToken(foundUser as User, "refresh");
+    const accessToken = createToken(foundUser);
+    const refreshToken = createToken(foundUser, "refresh");
 
     return {
         accessToken,

@@ -1,6 +1,15 @@
 import {NextFunction, Request, Response} from "express";
-import jwt from "jsonwebtoken";
+import jwt, {JwtPayload} from "jsonwebtoken";
 import env from "../config/config";
+
+// todo: find a better way to do this
+declare global {
+    namespace Express {
+        interface Request {
+            userClaims: string | JwtPayload
+        }
+    }
+}
 
 const createProtectedMiddleware = (tokenType? : string) => {
 

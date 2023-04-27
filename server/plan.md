@@ -1,7 +1,9 @@
 # Next Steps
 
 - Test Logout-Route
-- 
+- Validation of create User, create Player
+- Update/Delete User
+- Update/Delete Player
 
 
 ## Next BIG Steps

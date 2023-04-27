@@ -1,5 +1,9 @@
 import userController from "./userController";
+import playerController from "./playerController";
+import teamController from "./teamController";
 
 export {
-    userController
+    userController,
+    playerController,
+    teamController
 }
