@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import {PlayerSchema} from "./playerModel";
 
 const Schema = mongoose.Schema;
 
@@ -10,7 +9,7 @@ interface Team extends mongoose.Document {
 
 const teamSchema = new Schema <Team> ({
     name: {type: String, required: true},
-    players: [{type: Schema.Types.ObjectId, ref: PlayerSchema}],
+    players: [{type: Schema.Types.ObjectId, ref: "player"}],
 });
 
 export const MTeamModel = mongoose.model("team", teamSchema);
