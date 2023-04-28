@@ -1,12 +1,15 @@
 # Next Steps
 
+- Finish Team and Match Routes, Services, so that it works
+- Review all Routes, add missing endpoints(delete, update), add validation
+- Review Mongoose
+
+- TESTS!
+
 - Test Logout-Route
-- Validation of create User, create Player
-- Update/Delete User
-- Update/Delete Player
 
 
-## Next BIG Steps
+## Entities
 
 - Player Schema
   - FirstName
@@ -26,10 +29,3 @@
   - AwayTeam[relation to teamId]
   - Result
   - (goalscorer, matchup etc.)
-
-- Routes
-  - create
-  - delete
-  - update
-  - read all
-  - read one-details
