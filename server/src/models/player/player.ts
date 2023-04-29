@@ -2,7 +2,7 @@ export interface Player {
     _id? : string;
     firstName: string,
     lastName: string,
-    createdAt: Date,
+    createdAt?: Date,
     stats: {
         goalkeeping: Number,
         defense: Number,
