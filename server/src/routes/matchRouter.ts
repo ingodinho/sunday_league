@@ -4,3 +4,4 @@ import {matchController} from "../controllers";
 export const matchRouter = express.Router();
 
 matchRouter.get("/all", matchController.getAll);
+matchRouter.post("/matchup")

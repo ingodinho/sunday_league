@@ -11,6 +11,15 @@ const getAll = async (req: Request, res: Response) => {
     }
 }
 
+const matchup = async (req: Request, res: Response) => {
+    try {
+
+    } catch (error) {
+        console.log("C: matchController, matchup", error);
+        res.status(400).end();
+    }
+}
+
 export default {
     getAll
 }

@@ -1,5 +1,9 @@
+import {add} from "./addMatch";
+import {calcMatch} from "./calcMatch";
 import {getAll} from "./getAllMatches";
 
 export default {
-    getAll
+    add,
+    calcMatch,
+    getAll,
 }

@@ -1,10 +1,14 @@
-import mongoose, {ObjectId} from "mongoose";
+import mongoose from "mongoose";
 import {MPlayerModel} from "../models/mongoose/playerModel";
 import {MTeamModel} from "../models/mongoose/teamModel";
 import env from "../config/config";
 import {Player} from "../models/player/player";
 import {Team} from "../models/team/team";
+import {faker} from "@faker-js/faker";
 
+
+// Clearing Database
+// 1. Deleting all Documents in PLAYER and TEAM Collection
 // SEEDING Database.
 // 1. create player and team objects with data.
 // 2. insert teams in db
@@ -12,20 +16,26 @@ import {Team} from "../models/team/team";
 // 4. insert updated players in db
 // 5. update teams in db with the player id
 
-const players : Player[] = [
-    {firstName: "Norbert", lastName: "Nordbrock", team: "", stats: {goalkeeping: 3, defense: 15, midfield: 10, offense: 5}},
-    {firstName: "Jannes", lastName: "Utecht", team: "", stats: {goalkeeping: 2, defense: 18, midfield: 5, offense: 3}},
-    {firstName: "Ingo", lastName: "Siemens", team: "", stats: {goalkeeping: 1, defense: 5, midfield: 15, offense: 12}},
-    {firstName: "Jens", lastName: "Boettcher", team: "", stats: {goalkeeping: 3, defense: 7, midfield: 18, offense: 12}},
-    {firstName: "Matze", lastName: "Schgaup", team: "", stats: {goalkeeping: 3, defense: 9, midfield: 14, offense: 12}},
-]
+const players : Player[] = new Array(22).fill("whatever").map(() => {
+    return {
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        stats: {
+            goalkeeping: faker.datatype.number({max: 20, min: 1, precision: 1}),
+            defense: faker.datatype.number({max: 20, min: 1, precision: 1}),
+            midfield: faker.datatype.number({max: 20, min: 1, precision: 1}),
+            offense: faker.datatype.number({max: 20, min: 1, precision: 1}),
+        },
+        team: ""
+    };
+})
 
 const teams : Team[] = [
     {name: "Gurkentruppe", players: []},
     {name: "Wahnsinnsmannschaft", players: []}
 ]
 
-const cleanDatabase = async () => {
+const clearDatabase = async () => {
     await MTeamModel.deleteMany();
     await MPlayerModel.deleteMany();
 }
@@ -33,12 +43,13 @@ const cleanDatabase = async () => {
 const seedDatabase = async () => {
     await mongoose.connect(`${env.DB_URI!}/${env.DB_NAME}`);
 
-    await cleanDatabase();
+    await clearDatabase();
 
     const insertedTeams = await MTeamModel.insertMany(teams);
 
     const playersWithTeamIds = players.map((player, index) => {
         if(index % 2 === 0) {
+            // player.team = mongoose.mongo.ObjectId(insertedTeams[0]._id);
             player.team = insertedTeams[0]._id;
             return player;
         }
@@ -49,8 +60,8 @@ const seedDatabase = async () => {
     // todo: change any to appropriate type
     const insertedPlayers : any = await MPlayerModel.insertMany(playersWithTeamIds);
 
-    const playersTeamOne : Player[] = insertedPlayers.filter((player: Player) => player.team === insertedTeams[0]._id.toString());
-    const playersTeamTwo : Player[] = insertedPlayers.filter((player: Player) => player.team === insertedTeams[1]._id.toString());
+    const playersTeamOne : Player[] = insertedPlayers.filter((player: Player) => player.team === insertedTeams[0]._id);
+    const playersTeamTwo : Player[] = insertedPlayers.filter((player: Player) => player.team === insertedTeams[1]._id);
 
 
     const playersTeamOneIds = playersTeamOne.map(player => player._id);

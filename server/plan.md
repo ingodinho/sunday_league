@@ -1,5 +1,7 @@
 # Next Steps
 
+- CHECK MONGOOSE, Object ID in player.team
+
 - Finish Team and Match Routes, Services, so that it works
 - Review all Routes, add missing endpoints(delete, update), add validation
 - Review Mongoose
