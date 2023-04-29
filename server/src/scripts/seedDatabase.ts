@@ -25,8 +25,15 @@ const teams : Team[] = [
     {name: "Wahnsinnsmannschaft", players: []}
 ]
 
+const cleanDatabase = async () => {
+    await MTeamModel.deleteMany();
+    await MPlayerModel.deleteMany();
+}
+
 const seedDatabase = async () => {
     await mongoose.connect(`${env.DB_URI!}/${env.DB_NAME}`);
+
+    await cleanDatabase();
 
     const insertedTeams = await MTeamModel.insertMany(teams);
 
